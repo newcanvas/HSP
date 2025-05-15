@@ -1,4 +1,4 @@
-def FindNum(list1: list, n: int):
+def FindNum(list1: list, n: int) -> int:
     ind = -1
     for i in range(len(list1)):
         if list1[i] == n:

@@ -69,7 +69,7 @@ if my_persona.current_level == 63:
     current_skills.append("Power Charge")  # На 63 уровне открывается заклинание "Power Charge"
 print(current_skills)
 print(my_persona.start_skills)
-# В итоге такой программы изменится список my_persona.start_skills, который должен остаться неизменным. Исправить проблему можно с помощью создания полной копии на 30й строке: my_persona.start_skills.copy().
+# В итоге такой программы изменится список my_persona.start_skills, который должен остаться неизменным. Исправить проблему можно с помощью создания полной копии: current_skills = my_persona.start_skills.copy().
 
     
 

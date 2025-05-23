@@ -21,7 +21,7 @@ class Persona: # Боевая персона
     def ObtainPersona(self):
         self.is_obtained = True
 
-Mara_persona = Persona("Mara", "Tower", 62, 63, ["Agidyne", "Blight"], False)
+Mara_persona = Persona("Mara", "Tower", 62, 63, ["Agidyne", "Blight"])
 
 if Mara_persona.current_level >= Mara_persona.min_level:
     Mara_persona.ObtainPersona()

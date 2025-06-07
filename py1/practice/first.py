@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 x = int(input("Введите x: "))
 y = int(input("Введите y: "))
 z = int(input("Введите z: "))

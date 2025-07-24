@@ -1,8 +1,11 @@
 #Рефлексия
-#Зря использовала громоздкое решение с распаковкой и удалением, также можно было использовать уже существующую функцию поиска.
+#Зря использовала громоздкое решение с распаковкой и удалением.
+#Также можно было использовать уже существующую функцию поиска.
 
 #Решение
 #3.1.
+"""Модуль, позволяющий работать с файлами и модуль, работающий с изображениями."""
+
 import os
 from PIL import Image
 
@@ -12,7 +15,7 @@ def scan_dir(path, ext):
         if ext == ".*" or f.endswith(ext):
             files.append(f)
     return files
-        
+
 def change_ext(old_ext, new_ext):
     r = scan_dir(".", old_ext)
     for i in r:
@@ -22,6 +25,8 @@ def change_ext(old_ext, new_ext):
         im.save(new_filename)
 
 #3.2
+"""Модуль, позволяющий работать с файлами и модуль, работающий с изображениями."""
+
 import os
 from PIL import Image, ImageDraw
 
@@ -31,7 +36,7 @@ def scan_dir(path, ext):
         if ext == ".*" or f.endswith(ext):
             files.append(f)
     return files
-        
+
 def change_ext(old_ext, new_ext):
     r = scan_dir(".", old_ext)
     for i in r:
@@ -58,4 +63,3 @@ def change_ext(old_ext, new_ext):
         im.save(new_filename)
         del draw
         im.show()
-

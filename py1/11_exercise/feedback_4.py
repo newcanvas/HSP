@@ -6,9 +6,9 @@ def open_and_sum(inf_list: list) -> int:
             for line in current_file:
                 summ+=int(line)
         except ValueError:
-            print("Внутри файлов что-то кроме чисел")
+            return "Внутри файлов что-то кроме чисел"
         except Exception:
-            print("Один из файлов поврежден, нужно разбираться")
+            return "Один из файлов поврежден, нужно разбираться"
         finally:
             current_file.close()
     return summ

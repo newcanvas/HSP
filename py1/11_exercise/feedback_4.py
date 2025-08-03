@@ -1,4 +1,4 @@
-def open_and_sum(inf_list):
+def open_and_sum(inf_list: list) -> int:
     summ = 0
     for file in inf_list:
         try:
@@ -11,5 +11,4 @@ def open_and_sum(inf_list):
             print("Один из файлов поврежден, нужно разбираться")
         finally:
             current_file.close()
-            #print(summ)
     return summ

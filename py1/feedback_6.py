@@ -1,7 +1,6 @@
 from random import randint
 
 def FindValue(N):
-    final = []
     keys = []
     dictionary = {}
 
@@ -10,12 +9,10 @@ def FindValue(N):
         if num in keys:
             dictionary[num] += 1
             keys.append(num)
-            if dictionary[num] == N:
-                final.append(num)
-            if dictionary[num] > N:
-                final.remove(num)
-                dictionary[num] = -1000
             continue
         keys.append(num)
         dictionary[num] = 1
+
+    dictionary = dict(filter(lambda item: item[1] == N, dictionary.items()))
+    final = list(dictionary.keys())
     return final

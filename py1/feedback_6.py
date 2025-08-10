@@ -1,18 +1,15 @@
-from random import randint
-
-def FindValue(N):
-    keys = []
+def FindValue(values, N):
+    final = set()
     dictionary = {}
-
-    for key in range(100):
-        num = randint(1,10)
-        if num in keys:
+    for num in values:
+        if dictionary.get(num, None):
             dictionary[num] += 1
-            keys.append(num)
-            continue
-        keys.append(num)
-        dictionary[num] = 1
+        else:
+            dictionary[num] = 1
 
-    dictionary = dict(filter(lambda item: item[1] == N, dictionary.items()))
-    final = list(dictionary.keys())
-    return final
+        if dictionary[num] == N:
+            final.add(num)
+        if dictionary[num] > N:
+            final.discard(num)
+
+    return list(final)

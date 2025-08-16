@@ -9,3 +9,5 @@ def MadMax(N: int, Tele: list) -> list:
             new_list.append(max(sorts))
             sorts.remove(max(sorts))
     return new_list
+
+

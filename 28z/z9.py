@@ -40,5 +40,5 @@ def TheRabbitsFoot(s: str, encode: bool) -> str:
             str1 += ' '
 
     return str1
-x = TheRabbitsFoot('отдай мою кроличью лапку', True)
-print(x)
+
+

@@ -4,6 +4,8 @@ def Unmanned(L: int, N: int, track: list) -> int:
 
     for i in range(N):
         dist, red, green = track[i]
+        if i == 0 and dist > L:
+            return L
         total += dist - prev_dist
         prev_dist = dist
 

@@ -16,7 +16,7 @@ def TankRush(H1: int, W1: int, S1: str, H2: int, W2: int, S2: str) -> bool:
     for i in s2_list:
         sub_start = []
         for j in s1_list:
-            for m in re.finditer(i, j):
+            for m in re.finditer(f"(?={i})", j):
                 sub_start.append(m.start())
         starts.append(sub_start)
 

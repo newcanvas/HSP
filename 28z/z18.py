@@ -1,10 +1,16 @@
 def MisterRobot(N: int, data: list) -> bool:
 
-    iteration = 0
-    for i in range(N):
-        for j in range(i+1, N):
-            if data[i] > data[j]:
-                iteration += 1
+    subset = data.copy()
 
-    return iteration % 2 == 0
+    i = 0
+    while i < N-2:
+        sub = subset[i:i+3]
+        if sub.index(min(sub)) != 0:
+            while sub.index(min(sub)) != 0:
+                sub = sub[1:] + sub[:1]
+            subset[i:i+3] = sub
+            i = 0
+        i += 1
+
+    return subset[-2] < subset[-1]
 

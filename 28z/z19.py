@@ -12,6 +12,12 @@ def ShopOLAP(N: int, items: list) -> list:
     items_list = []
     for key, value in items_dict.items():
         items_list.append(key + ' ' + str(value))
+    items_list.sort()
 
-    return sorted(items_list)
+    def get_end(item):
+        return item[-1]
+
+    items_list.sort(reverse=True, key=get_end)
+
+    return items_list
 

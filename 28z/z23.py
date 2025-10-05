@@ -7,7 +7,7 @@ def TreeOfLife(H: int, W: int, N: int, tree: list) -> list:
     for i in range(H):
         for j in range(W):
             if all_lists[i][j] == '.':
-                 all_lists[i][j] = 0
+                all_lists[i][j] = 0
             else:
                 all_lists[i][j] = 1
 
@@ -37,6 +37,6 @@ def TreeOfLife(H: int, W: int, N: int, tree: list) -> list:
                 all_lists[h][w] = '+'
         new_string = "".join(all_lists[h])
         final.append(new_string)
-                                
+
     return final
 

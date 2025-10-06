@@ -16,7 +16,7 @@ def TreeOfLife(H: int, W: int, N: int, tree: list) -> list:
             for b in range(W):
                 all_lists[a][b] += 1
 
-        current_year = all_lists.copy()
+        current_year = [row[:] for row in all_lists]
 
         if year % 2 != 0:
             for a in range(H):

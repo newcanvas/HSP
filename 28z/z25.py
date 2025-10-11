@@ -12,5 +12,5 @@ def TransformTransform(A: list, N: int) -> bool:
 
     summ = sum(S(S(A, N), len(S(A, N))))
 
-    return summ // 2 == 0
+    return summ % 2 == 0
 

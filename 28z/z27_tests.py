@@ -18,5 +18,8 @@ class DivTests(unittest.TestCase):
     def test_regression5(self):
         self.assertEqual(Football([1,4,3,2,5], 5), True)
 
+    def test_regression6(self):
+        self.assertEqual(Football([1,2,3], 3), False)
+
 if __name__ == '__main__':
     unittest.main()

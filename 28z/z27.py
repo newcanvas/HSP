@@ -23,5 +23,5 @@ def Football(F: list, N: int) -> bool:
                     if pos not in affected_range:
                         return False
 
-    return True
+    return F != F1
 

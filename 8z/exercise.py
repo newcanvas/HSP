@@ -10,5 +10,12 @@ def expo(N, M):
 def summ(N):
     if N == 0:
         return N
-    D = N % 10
-    return summ(N // 10) + D
+    return summ(N // 10) + N % 10
+
+# 3. расчёт длины списка, для которого разрешена только операция удаления первого элемента pop(0) (и получение длины конечно);
+
+def summ_list(list1):
+    if len(list1) == 0:
+        return 0
+    x = [list1.pop(0)]
+    return len(x) + summ_list(list1)

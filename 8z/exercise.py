@@ -17,5 +17,12 @@ def summ(N):
 def summ_list(list1):
     if len(list1) == 0:
         return 0
-    x = [list1.pop(0)]
-    return len(x) + summ_list(list1)
+    list1.pop(0)
+    return 1 + summ_list(list1)
+
+def summ_list_2(list1):
+    try:
+        list1.pop(0)
+        return 1 + summ_list_2(list1)
+    except IndexError:
+        return 0

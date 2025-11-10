@@ -29,9 +29,11 @@ def summ_list_2(list1):
 
 # 4. проверка, является ли строка палиндромом;
 
-def tenet(string1):
-    if string1 == '' or len(string1) == 0:
+def tenet(string1, start = 0, end = -1):
+    if len(string1) <= 1:
         return True
-    if string1[0] != string1[-1]:
+    if start == len(string1) // 2:
+        return True
+    if string1[start] != string1[end]:
         return False
-    return tenet(string1[1:-1])
+    return tenet(string1, start+1, end-1)

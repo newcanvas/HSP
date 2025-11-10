@@ -26,3 +26,12 @@ def summ_list_2(list1):
         return 1 + summ_list_2(list1)
     except IndexError:
         return 0
+
+# 4. проверка, является ли строка палиндромом;
+
+def tenet(string1):
+    if string1 == '' or len(string1) == 0:
+        return True
+    if string1[0] != string1[-1]:
+        return False
+    return tenet(string1[1:-1])

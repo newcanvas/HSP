@@ -40,3 +40,25 @@ def tenet(string1, start = None, end = None):
     if string1[start] != string1[end]:
         return False
     return tenet(string1, start+1, end-1)
+
+# 5. печать только чётных значений из списка;
+
+def even_element(list1, index = None):
+    if index == None:
+        index = 0
+    if index == len(list1):
+        return
+    if list1[index] % 2 == 0:
+        print(list1[index])
+    return even_element(list1, index+1)
+
+# 6. печать элементов списка с чётными индексами;
+
+def even_index(list1, index = None):
+    if index == None:
+        index = 0
+    if index == len(list1):
+        return
+    if index % 2 == 0:
+        print(list1[index])
+    return even_index(list1, index+1)

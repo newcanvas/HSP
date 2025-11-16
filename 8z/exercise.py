@@ -41,39 +41,57 @@ def tenet(string1):
 # 5. печать только чётных значений из списка;
 
 def even_element(list1):
-    def index(i):
-        if i == len(list1):
-            return
-        if list1[i] % 2 == 0:
-            print(list1[i])
-        return index(i+1)
-    return index(0)
+    return even_element_rec(list1, 0)
+
+def even_element_rec(list1, i):
+    if i == len(list1):
+        return
+    if list1[i] % 2 == 0:
+        print(list1[i])
+    return  even_element_rec(list1, i+1)
 
 # 6. печать элементов списка с чётными индексами;
 
 def even_index(list1):
-    def index(i):
-        if i == len(list1):
-            return
-        if i % 2 == 0:
-            print(list1[i])
-        return index(i+1)
-    return index(0)
+    return even_index_rec(list1, 0)
+
+def even_index_rec(list1, i):
+    if i == len(list1):
+        return
+    if i % 2 == 0:
+        print(list1[i])
+    return even_index_rec(list1, i+1)
 
 # 7. нахождение второго максимального числа в списке (с учётом, что максимальных может быть несколько, если они равны).
 
 def second_max(list1):
     max1 = list1[0]
     max2 = list1[1]
-    def index(i):
-        nonlocal max1
-        nonlocal max2
-        if i == len(list1) - 1:
-            return max2
-        if list1[i] >= max1:
-            max2 = max1
-            max1 = list1[i]
-        elif list1[i] > max2:
-            max2 = list1[i]
-        return index(i+1)
-    return index(0)
+    return second_max_rec(list1, 0, max1, max2)
+
+def second_max_rec(list1, i, max1, max2):
+    if i == len(list1):
+        return max2
+    if list1[i] >= max1:
+        max2 = max1
+        max1 = list1[i]
+    elif list1[i] > max2:
+        max2 = list1[i]
+    return second_max_rec(list1, i+1, max1, max2)
+
+# 8. поиск всех файлов в заданном каталоге, включая файлы, расположенные в подкаталогах произвольной вложенности.
+
+import os
+
+def find_files(path):
+    files = []
+    find_files_rec(path, files)
+    return files
+
+def find_files_rec(path, files):
+    for level in os.listdir(path):
+        full = os.path.join(path, level)
+        if os.path.isfile(full):
+            files.append(full)
+        elif os.path.isdir(full):
+            find_files_rec(full, files)

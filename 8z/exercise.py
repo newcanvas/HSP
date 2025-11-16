@@ -30,13 +30,14 @@ def summ_list_2(list1):
 # 4. проверка, является ли строка палиндромом;
 
 def tenet(string1):
-    def index(left, right):
-        if left >= right:
-            return True
-        if string1[left] != string1[right]:
-            return False
-        return index(left + 1, right - 1)
-    return index(0, len(string1) - 1)
+  return index(string1, 0, len(string1) - 1)  
+    
+def index(string1, left, right):
+    if left >= right:
+        return True
+    if string1[left] != string1[right]:
+        return False
+    return index(string1, left + 1, right - 1)
 
 # 5. печать только чётных значений из списка;
 

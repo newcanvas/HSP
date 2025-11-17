@@ -1,20 +1,20 @@
 # 1. возведение числа N в степень M;
 
-def expo(N, M):
+def expo(N: int, M: int) -> int:
     if N == 1:
         return N * M
     return expo((N - 1), M) * M
 
 # 2. вычисление суммы цифр числа;
 
-def summ(N):
+def summ(N: int) -> int:
     if N == 0:
         return N
     return summ(N // 10) + N % 10
 
 #  3. расчёт длины списка, для которого разрешена только операция удаления первого элемента pop(0) (и получение длины конечно);
 
-def summ_list(list1):
+def summ_list(list1: list) -> int:
     if len(list1) == 0:
         return 0
     list1.pop(0)
@@ -29,7 +29,7 @@ def summ_list_2(list1):
 
 # 4. проверка, является ли строка палиндромом;
 
-def tenet(string1):
+def tenet(string1: str) -> bool:
   return index(string1, 0, len(string1) - 1)  
     
 def index(string1, left, right):
@@ -41,7 +41,7 @@ def index(string1, left, right):
 
 # 5. печать только чётных значений из списка;
 
-def even_element(list1):
+def even_element(list1: list) -> None:
     return even_element_rec(list1, 0)
 
 def even_element_rec(list1, i):
@@ -53,7 +53,7 @@ def even_element_rec(list1, i):
 
 # 6. печать элементов списка с чётными индексами;
 
-def even_index(list1):
+def even_index(list1: list) -> None:
     return even_index_rec(list1, 0)
 
 def even_index_rec(list1, i):
@@ -64,9 +64,9 @@ def even_index_rec(list1, i):
 
 # 7. нахождение второго максимального числа в списке (с учётом, что максимальных может быть несколько, если они равны).
 
-def second_max(list1):
+def second_max(list1: list) -> float:
     if len(list1) <= 1:
-        return
+        return None
     max1 = max(list1)
     if list1.index(max(list1)) == 0:
         max2 = list1[1]
@@ -85,15 +85,12 @@ def second_max_rec(list1, i, max1, max2):
 
 import os
 
-def find_files(path):
+def find_files(path: str) -> list:
     files = []
-    find_files_rec(path, files)
-    return files
-
-def find_files_rec(path, files):
     for level in os.listdir(path):
         full = os.path.join(path, level)
         if os.path.isfile(full):
             files.append(full)
         elif os.path.isdir(full):
-            find_files_rec(full, files)
+            files.extend(find_files(full))
+    return files

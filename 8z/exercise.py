@@ -57,27 +57,28 @@ def even_index(list1):
     return even_index_rec(list1, 0)
 
 def even_index_rec(list1, i):
-    if i == len(list1):
+    if i >= len(list1):
         return
-    if i % 2 == 0:
-        print(list1[i])
-    return even_index_rec(list1, i+1)
+    print(list1[i])
+    return even_index_rec(list1, i+2)
 
 # 7. нахождение второго максимального числа в списке (с учётом, что максимальных может быть несколько, если они равны).
 
 def second_max(list1):
-    max1 = list1[0]
-    max2 = list1[1]
+    if len(list1) <= 1:
+        return
+    max1 = max(list1)
+    if list1.index(max(list1)) == 0:
+        max2 = list1[1]
+    else:
+        max2 = list1[0]
     return second_max_rec(list1, 0, max1, max2)
-
+    
 def second_max_rec(list1, i, max1, max2):
     if i == len(list1):
         return max2
-    if list1[i] >= max1:
-        max2 = max1
-        max1 = list1[i]
-    elif list1[i] > max2:
-        max2 = list1[i]
+    if i != list1.index(max(list1)) and list1[i] > max2:
+       max2 = list1[i]
     return second_max_rec(list1, i+1, max1, max2)
 
 # 8. поиск всех файлов в заданном каталоге, включая файлы, расположенные в подкаталогах произвольной вложенности.

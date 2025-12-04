@@ -1,6 +1,6 @@
 import re
 
-def white_walker_2(village: str) -> bool:
+def white_walkers(village: str) -> bool:
     safe = False
     counter = 0
     first_d = 0

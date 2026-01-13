@@ -321,7 +321,9 @@ class DivTests(unittest.TestCase):
         ds_list = LinkedList2_1()
         ds_list2 = LinkedList2_1()
         result = LinkedList2_1.merge_lists(ds_list, ds_list2)
-        self.assertEqual(result, None)
+        self.assertEqual(result.len(), 0)
+        self.assertIsNone(ds_list.head)
+        self.assertIsNone(ds_list.tail)
 
     def test_merge_one_in_one(self):
         ds_list = LinkedList2_1()

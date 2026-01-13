@@ -11,7 +11,7 @@ class Dummy_Node:
         self.prev = None
         self.next = None
 
-class LinkedList2_1:  
+class LinkedList2_1:
 
     def __init__(self):
         self.head = None
@@ -51,7 +51,7 @@ class LinkedList2_1:
             node = node.prev
         self.head, self.tail = self.tail, self.head
         return self
-    
+
     '''
     Задание 2.
     Задача 2.11.
@@ -62,7 +62,7 @@ class LinkedList2_1:
     def find_loop(self):
         if self.head is None:
             return False
-        
+
         first = self.head
         second = self.head
 
@@ -72,7 +72,7 @@ class LinkedList2_1:
             if first == second:
                 return True
         return False
-        
+
     '''
     Задание 2.
     Задача 2.12.
@@ -82,7 +82,7 @@ class LinkedList2_1:
 
     def sort_list(self):
         if self.head is None:
-            return
+            return self
 
         end_position = self.tail
 
@@ -104,14 +104,14 @@ class LinkedList2_1:
     '''
 
     def merge_lists(list1, list2):
+        final_list = LinkedList2_1()
         if list1.head is None and list2.head is None:
-            return
+            return final_list
         if list1.head is None:
             return list2.sort_list()
         if list2.head is None:
             return list1.sort_list()
-            
-        final_list = LinkedList2_1()
+
         list1.sort_list()
         list2.sort_list()
         node1 = list1.head
@@ -119,7 +119,7 @@ class LinkedList2_1:
         dummy = Node(-999)
         final_list.head = dummy
         final_list.tail = dummy
-            
+
         while node1 is not None or node2 is not None:
             if node1 is None:
                 final_list.tail.next = node2
@@ -153,5 +153,6 @@ class LinkedList2_1:
         list1.tail = None
         list2.head = None
         list2.tail = None
-    
+
         return final_list
+

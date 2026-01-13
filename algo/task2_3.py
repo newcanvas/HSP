@@ -33,7 +33,7 @@ class DivTests(unittest.TestCase):
         self.assertEqual(result, ds_list1.tail)
 
     # 2.2.
-        
+
     def test_find_all_empty(self):
         ds_list = LinkedList2()
         self.assertEqual(ds_list.find_all(1), [])
@@ -85,7 +85,7 @@ class DivTests(unittest.TestCase):
         self.assertEqual(ds_list.tail.value, 5)
 
     # 2.5.
-        
+
     def test_insert_empty(self):
         ds_list = LinkedList2()
         node = Node(10)
@@ -159,7 +159,7 @@ class DivTests(unittest.TestCase):
         self.assertEqual(ds_list.len(), 4)
 
     # 2.7.
-        
+
     def test_clean_empty(self):
         ds_list = LinkedList2()
         ds_list.clean()
@@ -182,7 +182,7 @@ class DivTests(unittest.TestCase):
         self.assertIsNone(ds_list.tail)
 
     # 2.8.
-        
+
     def test_len_empty(self):
         ds_list = LinkedList2()
         self.assertEqual(ds_list.len(), 0)
@@ -240,7 +240,7 @@ class DivTests(unittest.TestCase):
             self.assertIsNotNone(node)
             self.assertEqual(node.value, value)
             node = node.next
-    
+
     # 2.11.
 
     def test_find_loop_empty(self):
@@ -277,8 +277,8 @@ class DivTests(unittest.TestCase):
 
     def test_sort_empty(self):
         ds_list = LinkedList2_1()
-        result = ds_list.sort_list()
-        self.assertEqual(result, None)
+        self.assertEqual(ds_list.head, None)
+        self.assertEqual(ds_list.tail, None)
 
     def test_sort_one(self):
         ds_list = LinkedList2_1()
@@ -316,7 +316,7 @@ class DivTests(unittest.TestCase):
             node = node.next
 
     # 2.13., 2.14.
-            
+
     def test_merge_empty(self):
         ds_list = LinkedList2_1()
         ds_list2 = LinkedList2_1()
@@ -353,7 +353,7 @@ class DivTests(unittest.TestCase):
         self.assertEqual(result.head.value, -5)
         self.assertEqual(result.tail.value, 2000)
         self.assertEqual(result.len(), 14)
-    
+
 
 if __name__ == '__main__':
     unittest.main()

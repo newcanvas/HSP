@@ -111,3 +111,4 @@ class MultiDynArray:
                 current.array[idx] = value
             else:
                 current = current[idx]
+

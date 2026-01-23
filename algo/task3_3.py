@@ -58,12 +58,22 @@ class DivTests(unittest.TestCase):
         self.assertEqual(da.count, 16)
         self.assertEqual(da.capacity, 21)
 
-    def test_insert_incorrect_i(self):
+    def test_delete_incorrect_i(self):
         with self.assertRaises(Exception):
             da = DynArray()
             for i in range(16):
                 da.append(i)
             da.delete(99)
+
+    def test_delete_last(self):
+        da = DynArray()
+        for i in range(5):
+            da.append(i)
+        da.delete(4)
+        self.assertEqual(da.array[0], 0)
+        self.assertEqual(da.array[da.count-1], 3)
+        self.assertEqual(da.count, 4)
+        self.assertEqual(da.capacity, 16)
 
     # 5.
 

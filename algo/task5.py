@@ -11,6 +11,7 @@ class Queue:
         self.count = 0
 
     def enqueue(self, item): # Временная сложность: O(1), пространственная: O(1).
+        item = Node(item)
         if self.head is None:
             self.head = item
         else:

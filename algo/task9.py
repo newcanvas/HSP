@@ -1,7 +1,6 @@
 class NativeDictionary:
-    def __init__(self, sz, step):
+    def __init__(self, sz):
         self.size = sz
-        self.step = step
         self.slots = [None] * self.size
         self.values = [None] * self.size
 
@@ -17,7 +16,7 @@ class NativeDictionary:
                 return False
             if self.slots[slot] == key:
                 return True
-            slot += self.step
+            slot += 1
             if slot >= self.size:
                 slot -= self.size
             checked += 1
@@ -29,7 +28,7 @@ class NativeDictionary:
         while checked < self.size:
             if self.slots[slot] is None or self.slots[slot] == key:
                 return slot
-            slot += self.step
+            slot += 1
             if slot >= self.size:
                 slot -= self.size
             checked += 1
@@ -51,7 +50,7 @@ class NativeDictionary:
                 return None
             if self.slots[slot] == key:
                 return self.values[slot]
-            slot += self.step
+            slot += 1
             if slot >= self.size:
                 slot -= self.size
             checked += 1
@@ -67,7 +66,7 @@ class NativeDictionary:
                 self.slots[slot] = None
                 self.values[slot] = None
                 return
-            slot += self.step
+            slot += 1
             if slot >= self.size:
                 slot -= self.size
             checked += 1

@@ -8,7 +8,7 @@ class DivTests(unittest.TestCase):
     # 4.
 
     def test_nd_put_get(self):
-        ND = NativeDictionary(17, 2)
+        ND = NativeDictionary(17)
         self.assertIsNone(ND.get('key1'))
         ND.put('key1', 'первое значение')
         self.assertEqual(ND.get('key1'), 'первое значение')
@@ -16,7 +16,7 @@ class DivTests(unittest.TestCase):
         self.assertEqual(ND.get('key1'), 'поменяли первое значение')
 
     def test_nd_is_key(self):
-        ND = NativeDictionary(17, 2)
+        ND = NativeDictionary(17)
         self.assertFalse(ND.is_key('key1'))
         ND.put('key1', 'первое значение')
         self.assertTrue(ND.is_key('key1'))
@@ -26,7 +26,7 @@ class DivTests(unittest.TestCase):
     # 5.
 
     def test_ond_put_and_get(self):
-        od = OrderedNativeDictionary(17, 2)
+        od = OrderedNativeDictionary(17)
         self.assertIsNone(od.get('key1'))
         od.put('key1', 'первое значение')
         self.assertEqual(od.get('key1'), 'первое значение')
@@ -35,7 +35,7 @@ class DivTests(unittest.TestCase):
         self.assertEqual(od.keys.len(), 1)
 
     def test_ond_delete(self):
-        od = OrderedNativeDictionary(17, 2)
+        od = OrderedNativeDictionary(17)
         od.delete('key1')
         od.put('key1', 'первое значение')
         od.put('key2', 'второе значение')
@@ -46,7 +46,7 @@ class DivTests(unittest.TestCase):
         self.assertEqual(od.keys.len(), 2)
 
     def test_ond_get_by_index(self):
-        od = OrderedNativeDictionary(17, 2)
+        od = OrderedNativeDictionary(17)
         self.assertIsNone(od.get_by_index(0))
         od.put('ключ3', 'третье значение')
         od.put('ключ1', 'первое значение')
@@ -56,7 +56,7 @@ class DivTests(unittest.TestCase):
         self.assertIsNone(od.get_by_index(3))
 
     def test_ond_descending_order(self):
-        od = OrderedNativeDictionary(17, 2, asc=False)
+        od = OrderedNativeDictionary(17, asc=False)
         od.put('ключ1', 'первое значение')
         od.put('ключ2', 'второе значение')
         od.put('ключ3', 'третье значение')

@@ -11,8 +11,8 @@ from task9 import NativeDictionary
 '''
 
 class OrderedNativeDictionary:
-    def __init__(self, size, step, asc=True):
-        self.dict = NativeDictionary(size, step)
+    def __init__(self, size, asc=True):
+        self.dict = NativeDictionary(size)
         self.keys = OrderedList(asc)
 
     def put(self, key, value):

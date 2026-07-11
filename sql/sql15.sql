@@ -11,6 +11,7 @@ AND squad_id IS NULL
 3.
 SELECT * FROM Tasks
 WHERE status = 'pending'
+AND priority = (SELECT MAX(priority) FROM Tasks)
 
 4.
 SELECT owner_id, COUNT(DISTINCT item_id)

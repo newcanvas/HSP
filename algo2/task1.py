@@ -11,9 +11,10 @@ class SimpleTree:
         self.Root = root # корень, может быть None
 	
     def AddChild(self, ParentNode, NewChild) -> None:
+        NewChild.Parent = ParentNode
         ParentNode.Children.append(NewChild)
         return
-  
+
     def DeleteNode(self, NodeToDelete) -> None:
         if NodeToDelete.Parent is None:
             self.Root = None

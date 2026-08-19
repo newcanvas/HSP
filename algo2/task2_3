@@ -1,0 +1,318 @@
+import unittest
+
+from task2 import BST, BSTNode
+
+
+def create_tree():
+    root = BSTNode(10, "ten", None)
+    tree = BST(root)
+
+    tree.AddKeyValue(5, "five")
+    tree.AddKeyValue(15, "fifteen")
+    tree.AddKeyValue(3, "three")
+    tree.AddKeyValue(7, "seven")
+    tree.AddKeyValue(12, "twelve")
+    tree.AddKeyValue(20, "twenty")
+
+    return tree
+
+def create_sum_tree():
+    root = BSTNode(10, 10, None)
+    tree = BST(root)
+
+    tree.AddKeyValue(5, 5)
+    tree.AddKeyValue(15, 15)
+    tree.AddKeyValue(3, 3)
+    tree.AddKeyValue(7, 7)
+    tree.AddKeyValue(12, 12)
+    tree.AddKeyValue(20, 20)
+
+    return tree
+
+def create_symmetric_tree():
+    root = BSTNode(10, 10, None)
+    tree = BST(root)
+
+    left = BSTNode(5, 5, root)
+    right = BSTNode(5, 5, root)
+
+    root.LeftChild = left
+    root.RightChild = right
+
+    left.LeftChild = BSTNode(3, 3, left)
+    right.RightChild = BSTNode(3, 3, right)
+
+    return tree
+
+
+class BSTTests(unittest.TestCase):
+
+    # 1. FindNodeByKey
+
+    def test_find_absent_key_to_left(self):
+        tree = create_tree()
+
+        result = tree.FindNodeByKey(4)
+
+        self.assertEqual(result.NodeHasKey, False)
+        self.assertEqual(result.Node.NodeKey, 3)
+        self.assertEqual(result.ToLeft, False)
+
+    def test_find_absent_key_to_right(self):
+        tree = create_tree()
+
+        result = tree.FindNodeByKey(8)
+
+        self.assertEqual(result.NodeHasKey, False)
+        self.assertEqual(result.Node.NodeKey, 7)
+        self.assertEqual(result.ToLeft, False)
+
+    def test_find_present_key(self):
+        tree = create_tree()
+
+        result = tree.FindNodeByKey(7)
+
+        self.assertEqual(result.NodeHasKey, True)
+        self.assertEqual(result.Node.NodeKey, 7)
+
+    # 2. AddKeyValue
+
+    def test_add_key_to_left(self):
+        tree = create_tree()
+
+        result_before = tree.FindNodeByKey(4)
+
+        self.assertEqual(result_before.NodeHasKey, False)
+
+        result = tree.AddKeyValue(4, "four")
+
+        self.assertEqual(result, True)
+
+        result_after = tree.FindNodeByKey(4)
+
+        self.assertEqual(result_after.NodeHasKey, True)
+        self.assertEqual(result_after.Node.NodeValue, "four")
+
+    def test_add_key_to_right(self):
+        tree = create_tree()
+
+        result_before = tree.FindNodeByKey(8)
+
+        self.assertEqual(result_before.NodeHasKey, False)
+
+        result = tree.AddKeyValue(8, "eight")
+
+        self.assertEqual(result, True)
+
+        result_after = tree.FindNodeByKey(8)
+
+        self.assertEqual(result_after.NodeHasKey, True)
+        self.assertEqual(result_after.Node.NodeValue, "eight")
+
+    def test_add_existing_key(self):
+        tree = create_tree()
+
+        result = tree.AddKeyValue(7, "new value")
+
+        self.assertEqual(result, False)
+
+        result_after = tree.FindNodeByKey(7)
+
+        self.assertEqual(result_after.NodeHasKey, True)
+        self.assertEqual(result_after.Node.NodeValue, "seven")
+
+    # 3. FinMinMax
+
+    def test_find_max_from_root(self):
+        tree = create_tree()
+
+        result = tree.FinMinMax(tree.Root, True)
+
+        self.assertEqual(result.NodeKey, 20)
+
+    def test_find_min_from_root(self):
+        tree = create_tree()
+
+        result = tree.FinMinMax(tree.Root, False)
+
+        self.assertEqual(result.NodeKey, 3)
+
+    def test_find_max_from_subtree(self):
+        tree = create_tree()
+
+        subtree = tree.Root.RightChild
+
+        result = tree.FinMinMax(subtree, True)
+
+        self.assertEqual(result.NodeKey, 20)
+
+    def test_find_min_from_subtree(self):
+        tree = create_tree()
+
+        subtree = tree.Root.RightChild
+
+        result = tree.FinMinMax(subtree, False)
+
+        self.assertEqual(result.NodeKey, 12)
+
+    # 4. DeleteNodeByKey
+
+    def test_delete_node(self):
+        tree = create_tree()
+
+        parent = tree.Root.LeftChild
+        node = parent.RightChild
+
+        self.assertEqual(node.NodeKey, 7)
+        self.assertEqual(parent.RightChild, node)
+
+        result = tree.DeleteNodeByKey(7)
+
+        self.assertEqual(result, True)
+        self.assertIsNone(parent.RightChild)
+
+    def test_delete_absent_node(self):
+        tree = create_tree()
+
+        result = tree.DeleteNodeByKey(100)
+
+        self.assertEqual(result, False)
+
+    # 5. Count
+
+    def test_count_nodes(self):
+        tree = create_tree()
+
+        self.assertEqual(tree.Count(), 7)
+
+    def test_count_empty_tree(self):
+        tree = BST(None)
+
+        self.assertEqual(tree.Count(), 0)
+
+    # 6. IsIdentical
+
+    def test_identical_trees(self):
+        tree1 = create_tree()
+        tree2 = create_tree()
+
+        self.assertEqual(tree1.IsIdentical(tree2), True)
+
+    def test_different_keys(self):
+        tree1 = create_tree()
+        tree2 = create_tree()
+
+        tree2.Root.LeftChild.NodeKey = 100
+
+        self.assertEqual(tree1.IsIdentical(tree2), False)
+
+    def test_different_values(self):
+        tree1 = create_tree()
+        tree2 = create_tree()
+
+        tree2.Root.LeftChild.NodeValue = 100
+
+        self.assertEqual(tree1.IsIdentical(tree2), False)
+
+    def test_identical_empty_trees(self):
+        tree1 = BST(None)
+        tree2 = BST(None)
+
+        self.assertEqual(tree1.IsIdentical(tree2), True)
+
+    # 7. FindPathsByLengh
+
+    def test_find_paths_by_length(self):
+        tree = create_tree()
+
+        result = tree.FindPathsByLengh(3)
+
+        self.assertEqual(result, [[10, 5, 3], [10, 5, 7], [10, 15, 12], [10, 15, 20]])
+
+    def test_find_paths_length_one(self):
+        tree = create_tree()
+
+        result = tree.FindPathsByLengh(1)
+
+        self.assertEqual(result, [])
+
+    def test_find_paths_too_long(self):
+        tree = create_tree()
+
+        result = tree.FindPathsByLengh(10)
+
+        self.assertEqual(result, [])
+
+    def test_find_paths_empty_tree(self):
+        tree = BST(None)
+
+        result = tree.FindPathsByLengh(3)
+
+        self.assertEqual(result, [])
+
+    # 8. FindMaxSumPaths
+
+    def test_find_max_sum_path(self):
+        tree = create_sum_tree()
+
+        result = tree.FindMaxSumPaths()
+
+        self.assertEqual(result, [[10, 15, 20]])
+
+    def test_find_max_sum_one_node(self):
+        root = BSTNode(10, 10, None)
+        tree = BST(root)
+
+        result = tree.FindMaxSumPaths()
+
+        self.assertEqual(result, [[10]])
+
+    def test_find_max_sum_empty_tree(self):
+        tree = BST(None)
+
+        result = tree.FindMaxSumPaths()
+
+        self.assertEqual(result, [])
+
+    def test_find_all_max_sum_paths(self):
+        root = BSTNode(10, 10, None)
+        tree = BST(root)
+
+        left = BSTNode(5, 5, root)
+        right = BSTNode(15, 15, root)
+
+        root.LeftChild = left
+        root.RightChild = right
+
+        left.LeftChild = BSTNode(10, 10, left)
+        right.RightChild = BSTNode(0, 0, right)
+
+        result = tree.FindMaxSumPaths()
+
+        self.assertEqual(result, [[10, 5, 10],[10, 15, 0]])
+
+  # 9. IsSymmetric
+
+    def test_symmetric_tree(self):
+        tree = create_symmetric_tree()
+
+        self.assertEqual(tree.IsSymmetric(), True)
+
+    def test_empty_tree_is_symmetric(self):
+        tree = BST(None)
+
+        self.assertEqual(tree.IsSymmetric(), True)
+
+    def test_one_node_tree_is_symmetric(self):
+        root = BSTNode(10, 10, None)
+        tree = BST(root)
+
+        self.assertEqual(tree.IsSymmetric(), True)
+
+    def test_not_symmetric_tree(self):
+        tree = create_tree()
+
+        self.assertEqual(tree.IsSymmetric(), False)
+
+if __name__ == '__main__':
+    unittest.main()

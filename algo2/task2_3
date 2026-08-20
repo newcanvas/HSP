@@ -1,6 +1,7 @@
 import unittest
 
 from task2 import BST, BSTNode
+from task2_2 import IsIdentical, IsSymmetric, FindMaxSumPaths, FindPathsByLength
 
 
 def create_tree():

@@ -1,5 +1,3 @@
-from task2_2 import (IsIdentical, _is_identical_rec, IsSymmetric, _is_symmetric_rec, FindMaxSumPaths, _find_max_sum_paths, FindPathsByLength ,_find_paths_by_length)
-
 class BSTNode:
 
     def __init__(self, key, val, parent):
@@ -122,16 +120,4 @@ class BST:
             return 0
 
         return 1 + self._count_rec(node.LeftChild) + self._count_rec(node.RightChild)
-
-    IsIdentical = IsIdentical
-    _is_identical_rec = _is_identical_rec
-
-    IsSymmetric = IsSymmetric
-    _is_symmetric_rec = _is_symmetric_rec
-
-    FindMaxSumPaths = FindMaxSumPaths
-    _find_max_sum_paths = _find_max_sum_paths
-
-    FindPathsByLength = FindPathsByLength
-    _find_paths_by_length = _find_paths_by_length
 

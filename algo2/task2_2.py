@@ -1,3 +1,5 @@
+from task2 import BST
+
 '''
 Задание 2.
 Задача 1.
@@ -32,6 +34,9 @@ def _is_identical_rec(self, node1, node2)-> bool:
 
     return True
 
+BST.IsIdentical = IsIdentical
+BST._is_identical_rec = _is_identical_rec
+
 '''
 Задание 2.
 Задача 2.
@@ -58,6 +63,9 @@ def _find_paths_by_length(self, node, length, path, paths) -> list:
     self._find_paths_by_length(node.RightChild, length, path, paths)
 
     path.pop()
+
+BST.FindPathsByLength = FindPathsByLength
+BST._find_paths_by_length = _find_paths_by_length
 
 '''
 Задание 2.
@@ -98,6 +106,9 @@ def _find_max_sum_paths(self, node, path, current_sum, max_sum, paths):
 
     path.pop()
 
+BST.FindMaxSumPaths = FindMaxSumPaths
+BST._find_max_sum_paths = _find_max_sum_paths
+
 '''
 Задание 2.
 Задача 4.
@@ -127,3 +138,6 @@ def _is_symmetric_rec(self, node1, node2) -> bool:
         return False
 
     return True
+
+BST.IsSymmetric = IsSymmetric
+BST._is_symmetric_rec = _is_symmetric_rec

@@ -1,4 +1,4 @@
-from task2_2 import (IsIdentical, _is_identical_rec, IsSymmetric, _is_symmetric_rec, FindMaxSumPaths, _find_max_sum_paths, FindPathsByLengh,_find_paths_by_length)
+from task2_2 import (IsIdentical, _is_identical_rec, IsSymmetric, _is_symmetric_rec, FindMaxSumPaths, _find_max_sum_paths, FindPathsByLength ,_find_paths_by_length)
 
 class BSTNode:
 
@@ -138,6 +138,6 @@ class BST:
     FindMaxSumPaths = FindMaxSumPaths
     _find_max_sum_paths = _find_max_sum_paths
 
-    FindPathsByLengh = FindPathsByLengh
+    FindPathsByLength = FindPathsByLength
     _find_paths_by_length = _find_paths_by_length
 

@@ -220,33 +220,33 @@ class BSTTests(unittest.TestCase):
 
         self.assertEqual(tree1.IsIdentical(tree2), True)
 
-    # 7. FindPathsByLengh
+    # 7. FindPathsByLength
 
     def test_find_paths_by_length(self):
         tree = create_tree()
 
-        result = tree.FindPathsByLengh(3)
+        result = tree.FindPathsByLength(3)
 
         self.assertEqual(result, [[10, 5, 3], [10, 5, 7], [10, 15, 12], [10, 15, 20]])
 
     def test_find_paths_length_one(self):
         tree = create_tree()
 
-        result = tree.FindPathsByLengh(1)
+        result = tree.FindPathsByLength(1)
 
         self.assertEqual(result, [])
 
     def test_find_paths_too_long(self):
         tree = create_tree()
 
-        result = tree.FindPathsByLengh(10)
+        result = tree.FindPathsByLength(10)
 
         self.assertEqual(result, [])
 
     def test_find_paths_empty_tree(self):
         tree = BST(None)
 
-        result = tree.FindPathsByLengh(3)
+        result = tree.FindPathsByLength(3)
 
         self.assertEqual(result, [])
 

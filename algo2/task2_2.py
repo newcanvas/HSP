@@ -38,7 +38,7 @@ def _is_identical_rec(self, node1, node2)-> bool:
 Метод, который нахождит все пути от корня к листьям, длина которых равна заданной величине.
 Временная сложность: O(N), пространственная: O(N).
 '''
-def FindPathsByLengh(self, length) -> list:
+def FindPathsByLength(self, length) -> list:
     paths = []
     self._find_paths_by_length(self.Root, length, [], paths)
     return paths

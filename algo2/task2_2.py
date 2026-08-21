@@ -79,7 +79,7 @@ def FindMaxSumPaths(self) -> list:
         return []
 
     paths = []
-    max_sum = [self.Root.NodeValue]
+    max_sum = [float('-inf')]
 
     self._find_max_sum_paths(self.Root, [], 0, max_sum, paths)
 
@@ -129,6 +129,9 @@ def _is_symmetric_rec(self, node1, node2) -> bool:
         return False
 
     if node1.NodeKey != node2.NodeKey:
+        return False
+
+    if node1.NodeValue != node2.NodeValue:
         return False
 
     if not self._is_symmetric_rec(node1.LeftChild, node2.RightChild):

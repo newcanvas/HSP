@@ -179,6 +179,108 @@ class BSTTests(unittest.TestCase):
 
         self.assertEqual(result, False)
 
+    def test_delete_left_leaf(self):
+        tree = create_tree()
+
+        parent = tree.Root.LeftChild
+
+        result = tree.DeleteNodeByKey(3)
+
+        self.assertEqual(result, True)
+        self.assertIsNone(parent.LeftChild)
+        self.assertEqual(tree.Count(), 6)
+        self.assertEqual(tree.FindNodeByKey(3).NodeHasKey, False)
+
+    def test_delete_node_with_one_child(self):
+        tree = create_tree()
+        tree.DeleteNodeByKey(3)
+
+        parent = tree.Root
+        node = parent.LeftChild
+
+        self.assertEqual(node.NodeKey, 5)
+        self.assertIsNone(node.LeftChild)
+        self.assertEqual(node.RightChild.NodeKey, 7)
+
+        result = tree.DeleteNodeByKey(5)
+
+        self.assertEqual(result, True)
+        self.assertEqual(parent.LeftChild.NodeKey, 7)
+        self.assertEqual(parent.LeftChild.Parent, parent)
+        self.assertEqual(tree.Count(), 5)
+        self.assertEqual(tree.FindNodeByKey(5).NodeHasKey, False)
+
+    def test_delete_node_with_two_children(self):
+        tree = create_tree()
+
+        result = tree.DeleteNodeByKey(5)
+
+        self.assertEqual(result, True)
+        self.assertEqual(tree.Root.LeftChild.NodeKey, 7)
+        self.assertEqual(tree.Root.LeftChild.Parent, tree.Root)
+        self.assertEqual(tree.Root.LeftChild.LeftChild.NodeKey, 3)
+        self.assertIsNone(tree.Root.LeftChild.RightChild)
+        self.assertEqual(tree.Count(), 6)
+        self.assertEqual(tree.FindNodeByKey(5).NodeHasKey, False)
+        self.assertEqual(tree.FindNodeByKey(7).NodeHasKey, True)
+
+    def test_delete_root_with_two_children(self):
+        tree = create_tree()
+
+        result = tree.DeleteNodeByKey(10)
+
+        self.assertEqual(result, True)
+        self.assertEqual(tree.Root.NodeKey, 12)
+        self.assertIsNone(tree.Root.Parent)
+        self.assertEqual(tree.Root.LeftChild.NodeKey, 5)
+        self.assertEqual(tree.Root.RightChild.NodeKey, 15)
+        self.assertEqual(tree.Root.LeftChild.Parent, tree.Root)
+        self.assertEqual(tree.Root.RightChild.Parent, tree.Root)
+        self.assertEqual(tree.Count(), 6)
+        self.assertEqual(tree.FindNodeByKey(10).NodeHasKey, False)
+
+    def test_delete_root_only_node(self):
+        root = BSTNode(10, "ten", None)
+        tree = BST(root)
+
+        result = tree.DeleteNodeByKey(10)
+
+        self.assertEqual(result, True)
+        self.assertIsNone(tree.Root)
+        self.assertEqual(tree.Count(), 0)
+
+    def test_delete_root_with_one_child(self):
+        root = BSTNode(10, "ten", None)
+        tree = BST(root)
+        tree.AddKeyValue(15, "fifteen")
+
+        result = tree.DeleteNodeByKey(10)
+
+        self.assertEqual(result, True)
+        self.assertEqual(tree.Root.NodeKey, 15)
+        self.assertIsNone(tree.Root.Parent)
+        self.assertEqual(tree.Count(), 1)
+
+    def test_delete_node_successor_has_right_child(self):
+        root = BSTNode(10, "ten", None)
+        tree = BST(root)
+        tree.AddKeyValue(5, "five")
+        tree.AddKeyValue(20, "twenty")
+        tree.AddKeyValue(15, "fifteen")
+        tree.AddKeyValue(17, "seventeen")
+
+        result = tree.DeleteNodeByKey(10)
+
+        self.assertEqual(result, True)
+        self.assertEqual(tree.Root.NodeKey, 15)
+        self.assertIsNone(tree.Root.Parent)
+        self.assertEqual(tree.Root.LeftChild.NodeKey, 5)
+        self.assertEqual(tree.Root.RightChild.NodeKey, 20)
+        self.assertEqual(tree.Root.RightChild.LeftChild.NodeKey, 17)
+        self.assertEqual(tree.Root.RightChild.LeftChild.Parent.NodeKey, 20)
+        self.assertEqual(tree.Count(), 4)
+        self.assertEqual(tree.FindNodeByKey(10).NodeHasKey, False)
+
     # 5. Count
 
     def test_count_nodes(self):
@@ -291,6 +393,17 @@ class BSTTests(unittest.TestCase):
         result = tree.FindMaxSumPaths()
 
         self.assertEqual(result, [[10, 5, 10],[10, 15, 0]])
+
+    def test_find_max_sum_negative_leaves(self):
+        root = BSTNode(10, 10, None)
+        tree = BST(root)
+
+        tree.AddKeyValue(5, -20)
+        tree.AddKeyValue(15, -5)
+
+        result = tree.FindMaxSumPaths()
+
+        self.assertEqual(result, [[10, 15]])
 
   # 9. IsSymmetric
 

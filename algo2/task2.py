@@ -100,13 +100,26 @@ class BST:
 
         delete_node = delete_result.Node
 
+        if delete_node.LeftChild is not None and delete_node.RightChild is not None:
+            successor = self.FinMinMax(delete_node.RightChild, False)
+            delete_node.NodeKey = successor.NodeKey
+            delete_node.NodeValue = successor.NodeValue
+            delete_node = successor
+
         if delete_node.LeftChild is not None:
             new_node = delete_node.LeftChild
         else:
             new_node = delete_node.RightChild
 
+        if new_node is not None:
+            new_node.Parent = delete_node.Parent
+
+        if delete_node.Parent is None:
+            self.Root = new_node
+            return True
+
         if delete_node.Parent.LeftChild is delete_node:
-            delete_node.LeftChild = new_node
+            delete_node.Parent.LeftChild = new_node
         else:
             delete_node.Parent.RightChild = new_node
 

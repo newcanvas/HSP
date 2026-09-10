@@ -20,32 +20,22 @@ class aBST:
 
     def __init__(self, depth):
         # правильно рассчитайте размер массива для дерева глубины depth:
-        tree_size = 2**depth - 1
+        tree_size = 2 ** (depth + 1) - 1
         self.Tree = [None] * tree_size # массив ключей
 	
     def FindKeyIndex(self, key):
         # ищем в массиве индекс ключа
-        if self.Tree == []:
-            self.Tree = [key]
-            return 0
-        if self.Tree[0] is None:
-            return 0
-
         index = 0
 
-        for i in range(len(self.Tree)-1):
-            if index >= len(self.Tree):
-                break
+        while index < len(self.Tree):
             if self.Tree[index] is None:
                 return -index
             if key == self.Tree[index]:
                 return index
             if key < self.Tree[index]:
                 index = 2 * index + 1
-                continue
-            if key > self.Tree[index]:
+            else:
                 index = 2 * index + 2
-                continue
 
         return None # не найден
 	

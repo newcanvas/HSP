@@ -11,7 +11,7 @@ class BalancedBST:
         self.Root = None
 
     def GenerateTree(self, a):
-        a.sort()
+        a = sorted(a)
 
         def build_tree(left, right, parent, level):
             if left > right:
@@ -29,16 +29,21 @@ class BalancedBST:
         self.Root = build_tree(0, len(a) - 1, None, 0)
 
     def IsBalanced(self, root_node):
-        if root_node is None:
-            return True
+        def height(node):
+            if node is None:
+                return 0
 
-        if root_node.LeftChild is not None:
-            if root_node.LeftChild.NodeKey >= root_node.NodeKey:
-                return False
+            left_height = height(node.LeftChild)
+            if left_height == -1:
+                return -1
 
-        if root_node.RightChild is not None:
-            if root_node.RightChild.NodeKey < root_node.NodeKey:
-                return False
+            right_height = height(node.RightChild)
+            if right_height == -1:
+                return -1
 
-        return (self.IsBalanced(root_node.LeftChild)
-                and self.IsBalanced(root_node.RightChild))
+            if abs(left_height - right_height) > 1:
+                return -1
+
+            return 1 + max(left_height, right_height)
+
+        return height(root_node) != -1

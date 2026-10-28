@@ -1,8 +1,7 @@
 import unittest
 from task6 import BalancedBST, BSTNode
-from task6_2 import IsBalanced, IsBalanced2
+from task6_2 import IsBalanced2
 
-BalancedBST.IsBalanced =  IsBalanced
 BalancedBST.IsBalanced2 = IsBalanced2
 
 
@@ -64,10 +63,30 @@ class TestIsBalanced(unittest.TestCase):
 
         self.assertEqual(tree.IsBalanced(root), True)
 
-    def test_left_child_greater_than_parent(self):
+    def test_generated_tree(self):
+        tree = BalancedBST()
+        tree.GenerateTree([8, 3, 10, 1, 6, 14, 4, 7, 13, 2])
+
+        self.assertEqual(tree.IsBalanced(tree.Root), True)
+
+    def test_chain(self):
+        tree = BalancedBST()
+        root = BSTNode(1, None)
+        root.RightChild = BSTNode(2, root)
+        root.RightChild.RightChild = BSTNode(3, root.RightChild)
+
+        self.assertEqual(tree.IsBalanced(root), False)
+
+    def test_unbalanced_inner_node(self):
         tree = BalancedBST()
         root = BSTNode(10, None)
-        root.LeftChild = BSTNode(12, root)
+        root.LeftChild = BSTNode(5, root)
+        root.RightChild = BSTNode(15, root)
+        root.RightChild.RightChild = BSTNode(20, root.RightChild)
+        root.LeftChild.LeftChild = BSTNode(3, root.LeftChild)
+        root.LeftChild.LeftChild.LeftChild = BSTNode(
+            2, root.LeftChild.LeftChild
+        )
 
         self.assertEqual(tree.IsBalanced(root), False)
 
@@ -100,6 +119,19 @@ class TestIsBalanced2(unittest.TestCase):
         root = BSTNode(10, None)
         root.LeftChild = BSTNode(5, root)
         root.RightChild = BSTNode(15, root)
+        root.LeftChild.LeftChild = BSTNode(3, root.LeftChild)
+        root.LeftChild.LeftChild.LeftChild = BSTNode(
+            2, root.LeftChild.LeftChild
+        )
+
+        self.assertEqual(tree.IsBalanced2(root), False)
+
+    def test_unbalanced_inner_node(self):
+        tree = BalancedBST()
+        root = BSTNode(10, None)
+        root.LeftChild = BSTNode(5, root)
+        root.RightChild = BSTNode(15, root)
+        root.RightChild.RightChild = BSTNode(20, root.RightChild)
         root.LeftChild.LeftChild = BSTNode(3, root.LeftChild)
         root.LeftChild.LeftChild.LeftChild = BSTNode(
             2, root.LeftChild.LeftChild

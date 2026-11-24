@@ -1,27 +1,108 @@
-from task1 import SimpleTree
+class SimpleTreeNode:
 
+    def __init__(self, val, parent):
+        self.NodeValue = val # значение в узле
+        self.Parent = parent # родитель или None для корня
+        self.Children = [] # список дочерних узлов
 
-def CollectEvenSubtrees(node, result) -> int:
-    size = 1
+class SimpleTree:
 
-    for child in node.Children:
-        size += CollectEvenSubtrees(child, result)
+    def __init__(self, root):
+        self.Root = root # корень, может быть None
 
-    if size % 2 == 0 and node.Parent is not None:
-        result.append(node.Parent)
-        result.append(node)
+    def AddChild(self, ParentNode, NewChild) -> None:
+        NewChild.Parent = ParentNode
+        ParentNode.Children.append(NewChild)
+        return
 
-    return size
+    def DeleteNode(self, NodeToDelete) -> None:
+        if NodeToDelete.Parent is None:
+            self.Root = None
+            return
+        NodeToDelete.Parent.Children.remove(NodeToDelete)
+        NodeToDelete.Parent = None
+        return
 
+    def GetAllNodes(self) -> list:
+        all_nodes = []
+        self._get_all_nodes_rec(self.Root, all_nodes)
+        return all_nodes
 
-def EvenTrees(self) -> list:
-    result = []
+    def _get_all_nodes_rec(self, node, all_nodes) -> list:
+        if node is None:
+            return
 
-    if self.Root is None:
+        all_nodes.append(node)
+
+        for child in node.Children:
+            self._get_all_nodes_rec(child, all_nodes)
+
+        return all_nodes
+
+    def FindNodesByValue(self, val) -> list:
+        all_nodes_by_value = []
+        self._find_nodes_by_value_rec(self.Root, val, all_nodes_by_value)
+        return all_nodes_by_value
+
+    def _find_nodes_by_value_rec(self, node, val, all_nodes_by_value) -> list:
+        if node is None:
+            return
+
+        if node.NodeValue == val:
+            all_nodes_by_value.append(node)
+
+        for child in node.Children:
+            self._find_nodes_by_value_rec(child, val, all_nodes_by_value)
+
+        return all_nodes_by_value
+
+    def MoveNode(self, OriginalNode, NewParent) -> None:
+        if OriginalNode == self.Root:
+            return
+        NewParent.Children.append(OriginalNode)
+        OriginalNode.Parent.Children.remove(OriginalNode)
+        OriginalNode.Parent = NewParent
+
+    def Count(self) -> int:
+        all_nodes = []
+        self._get_all_nodes_rec(self.Root, all_nodes)
+        return len(all_nodes)
+
+    def LeafCount(self) -> int:
+        all_leaves = []
+        self._count_leaves(self.Root, all_leaves)
+        return len(all_leaves)
+
+    def _count_leaves(self, node, all_leaves) -> int:
+        if node is None:
+            return
+
+        if node.Children == []:
+            all_leaves.append(node)
+
+        for child in node.Children:
+            self._count_leaves(child, all_leaves)
+
+        return all_leaves
+
+    def EvenTrees(self) -> list:
+        result = []
+
+        if self.Root is None:
+            return result
+
+        self._collect_even_subtrees(self.Root, result)
+
         return result
 
-    CollectEvenSubtrees(self.Root, result)
+    def _collect_even_subtrees(self, node, result) -> int:
+        size = 1
 
-    return result
+        for child in node.Children:
+            size += self._collect_even_subtrees(child, result)
 
-SimpleTree.EvenTrees = EvenTrees
+        if size % 2 == 0 and node.Parent is not None:
+            result.append(node.Parent)
+            result.append(node)
+
+        return size
